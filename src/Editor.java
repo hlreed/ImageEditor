@@ -68,6 +68,12 @@ public class Editor implements ImageEditor {
                 if(opt6.equals("y")) {
                     flatten_red();
                 }
+                if(opt7.equals("y")) {
+                    flatten_green();
+                }
+                if(opt8.equals("y")) {
+                    flatten_blue();
+                }
             }
             catch (FileNotFoundException ex) {
                 System.out.println("Error");
