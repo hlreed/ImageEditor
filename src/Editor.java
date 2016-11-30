@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,7 @@ public class Editor implements ImageEditor {
                 String outputFile = sca.next();
                 System.out.print("\nHere are your choices:\n[1]  convert to greyscale [2]  flip horizontally\n" +
                         "[3]  negative of red [4]  negative of green [5]  negative of blue\n" +
-                        "[6]  just the reds   [7]  just the greens   [8]  just the blues\n");
+                        "[6]  just the reds   [7]  just the greens   [8]  just the blues\n" + "[10] extreme contrast\n");
 
                 System.out.print("\nDo you want [1]? (y/n) ");
                 String opt1 = sca.next();
@@ -74,6 +75,15 @@ public class Editor implements ImageEditor {
                 if(opt8.equals("y")) {
                     flatten_blue();
                 }
+
+                PrintWriter writer = new PrintWriter(outputFile);
+                writer.println(magic + "\n" + width + " " + height + " " + depth);
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width * 3; j++) {
+                        writer.print(pixels[i][j] + " ");
+                    }
+                }
+                writer.close();
             }
             catch (FileNotFoundException ex) {
                 System.out.println("Error");
@@ -82,7 +92,9 @@ public class Editor implements ImageEditor {
 
         }
 
-        public void negate_red() {
+
+
+    public void negate_red() {
             int[][] pixelsNRed = new int [height][width * 3];
             for (int i = 0; i < height; i++) {
                 for (int j = 0; j < width * 3; j++) {
