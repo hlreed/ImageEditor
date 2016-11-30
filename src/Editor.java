@@ -182,6 +182,29 @@ public class Editor implements ImageEditor {
         }
     }
 
+    public void grey_scale() {
+        int[][] pixelsG = new int [height][width * 3];
+        int total;
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width * 3; j++) {
+                total = 0;
+                total += pixels[i][j];
+                total += pixels[i][j + 1];
+                total += pixels[i][j + 2];
+                total = total/3;
+                pixelsG[i][j] = total;
+                pixelsG[i][j + 1] = total;
+                pixelsG[i][j + 2] = total;
+                j =+2;
+            }
+        }
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width * 3; j++) {
+                pixels[i][j] = pixelsG[i][j];
+            }
+        }
+    }
+
     public void flatten_blue() {
         int[][] pixelsF = new int [height][width * 3];
         for (int i = 0; i < height; i++) {
