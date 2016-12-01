@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
@@ -13,6 +12,51 @@ public class Editor {
     protected int height;
     protected int depth;
 
+    public Editor () {
+        magic = "";
+        width = 0;
+        height = 0;
+        depth = 0;
+        pixels = new int [1][1];
+        pixels[0][0] = 0;
+    }
+
+
+
+    public int[][] getPixels() {
+        return pixels;
+    }
+
+    public String getMagic() {
+        return magic;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public Editor(String userfile) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(userfile));
+        magic = sc.next();
+        width = sc.nextInt();
+        height = sc.nextInt();
+        depth = sc.nextInt();
+        pixels = new int [height][width * 3];
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width * 3; j++) {
+                pixels [i][j] = sc.nextInt();
+            }
+        }
+    }
+
     public void negate_red() {
             int[][] pixelsNRed = new int [height][width * 3];
             for (int i = 0; i < height; i++) {
@@ -21,7 +65,7 @@ public class Editor {
                     pixelsNRed[i][j] = pix;
                     pixelsNRed[i][j + 1] = pixels[i][j + 1];
                     pixelsNRed[i][j + 2] = pixels[i][j + 2];
-                    j =+2;
+                    j += 2;
                 }
             }
             for (int i = 0; i < height; i++) {
@@ -57,7 +101,7 @@ public class Editor {
                 pixelsNBlue[i][j] = pixels[i][j];
                 pixelsNBlue[i][j + 1] = pixels[i][j + 1];
                 pixelsNBlue[i][j + 2] = pix;
-                j =+2;
+                j += 2;
             }
         }
         for (int i = 0; i < height; i++) {
@@ -74,7 +118,7 @@ public class Editor {
                 pixelsF[i][j] = 0;
                 pixelsF[i][j + 1] = pixels[i][j + 1];
                 pixelsF[i][j + 2] = pixels[i][j + 2];
-                j =+2;
+                j += 2;
             }
         }
         for (int i = 0; i < height; i++) {
@@ -91,7 +135,7 @@ public class Editor {
                 pixelsF[i][j] = pixels[i][j];
                 pixelsF[i][j + 1] = 0;
                 pixelsF[i][j + 2] = pixels[i][j + 2];
-                j =+2;
+                j += 2;
             }
         }
         for (int i = 0; i < height; i++) {
@@ -114,7 +158,7 @@ public class Editor {
                 pixelsG[i][j] = total;
                 pixelsG[i][j + 1] = total;
                 pixelsG[i][j + 2] = total;
-                j =+2;
+                j += 2;
             }
         }
         for (int i = 0; i < height; i++) {
@@ -131,7 +175,7 @@ public class Editor {
                 pixelsF[i][j] = pixels[i][j];
                 pixelsF[i][j + 1] = pixels[i][j + 1];
                 pixelsF[i][j + 2] = 0;
-                j =+2;
+                j += 2;
             }
         }
         for (int i = 0; i < height; i++) {
